@@ -142,8 +142,24 @@ public class ArrayList<E> implements List<E> {
 
         E oldElement = (E) elements[index];
         elements[index] = newElement;
-        
+
         return oldElement;
+    }
+
+    @Override
+    public E remove(int index) {
+        if(index >= size){
+            throw new IndexOutOfBoundsException(index + " >= " + size);
+        }
+
+        E element = (E) elements[index];
+
+        for (int i = index; i < size() - 1; i++) {
+            elements[i] = elements[i + 1];
+        }
+        size--;
+        ensureCapacity(size());
+        return element;
     }
 
     @Override
@@ -154,15 +170,15 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new ListIterator(0);
+        return new ArrayListIterator(0);
     }
 
-    private class ListIterator implements Iterator<E>{
+    private class ArrayListIterator implements Iterator<E>{
 
         int index;
         int preIndex = 0;
 
-        ListIterator(int index){
+        ArrayListIterator(int index){
             this.index = index;
         }
 

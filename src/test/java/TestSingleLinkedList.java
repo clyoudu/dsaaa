@@ -1,4 +1,4 @@
-import github.clyoudu.list.ArrayList;
+import github.clyoudu.list.SingleLinkedList;
 
 import java.util.Iterator;
 
@@ -6,14 +6,14 @@ import java.util.Iterator;
  * Created by IntelliJ IDEA
  *
  * @author chenlei
- * @date 2018/4/25
- * @time 23:46
- * @desc TestArrayList
+ * @date 2018/4/26
+ * @time 23:01
+ * @desc TestSingleLinkedList
  */
-public class TestArrayList {
+public class TestSingleLinkedList {
 
     public static void main(String[] args){
-        ArrayList<Integer> list = new ArrayList<>();
+        SingleLinkedList<Integer> list = new SingleLinkedList<>();
         for (int i = 0; i < 100; i++) {
             list.add(i);
         }

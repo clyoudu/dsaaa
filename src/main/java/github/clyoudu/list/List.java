@@ -14,5 +14,6 @@ public interface List<E> extends Collection<E> {
     E get(int index);
     boolean insert(int index,E element);
     E replace(int index,E newElement);
+    E remove(int index);
 
 }
