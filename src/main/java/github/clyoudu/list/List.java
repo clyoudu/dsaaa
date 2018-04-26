@@ -12,5 +12,7 @@ public interface List<E> extends Collection<E> {
 
     int indexOf(E element);
     E get(int index);
+    boolean insert(int index,E element);
+    E replace(int index,E newElement);
 
 }

@@ -118,6 +118,35 @@ public class ArrayList<E> implements List<E> {
     }
 
     @Override
+    public boolean insert(int index, E element) {
+        if(index >= size){
+            throw new IndexOutOfBoundsException(index + " >= " + size);
+        }
+
+        ensureCapacity(size() + 1);
+        for (int i = size; i > index; i--) {
+            elements[i] = elements[i - 1];
+        }
+
+        elements[index] = element;
+        size++;
+
+        return true;
+    }
+
+    @Override
+    public E replace(int index, E newElement) {
+        if(index >= size){
+            throw new IndexOutOfBoundsException(index + " >= " + size);
+        }
+
+        E oldElement = (E) elements[index];
+        elements[index] = newElement;
+        
+        return oldElement;
+    }
+
+    @Override
     public void clear() {
         size = 0;
         elements = EMPTY_ELEMENTS;
