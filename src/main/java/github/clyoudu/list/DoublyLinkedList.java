@@ -3,38 +3,37 @@ package github.clyoudu.list;
 import java.util.Iterator;
 
 /**
- * Created by IntelliJ IDEA
+ * Create by IntelliJ IDEA
  *
- * @author chenlei
- * @date 2018/4/26
- * @time 21:46
- * @desc SingleLinkedList
+ * @Author chenlei
+ * @DateTime 2018/5/3 15:38
+ * @Description DoublyLinkedList
  */
-public class SingleLinkedList<E> implements List<E> {
+public class DoublyLinkedList<E> implements List<E> {
 
-    Node<E> head;
+    SingleLinkedList.Node<E> head;
 
-    Node<E> tail;
+    SingleLinkedList.Node<E> tail;
 
     int size;
 
-    public SingleLinkedList() {
+    public DoublyLinkedList() {
         head = null;
         tail = null;
     }
 
-    public SingleLinkedList(E... elements) {
-        Node<E> prevNode = head;
+    public DoublyLinkedList(E... elements) {
+        SingleLinkedList.Node<E> prevNode = head;
         for (E element : elements) {
             if (size() == 0) {
-                head = new Node<>(element, null);
+                head = new SingleLinkedList.Node<>(element, null);
                 prevNode = head;
+                size++;
             } else {
-                Node<E> currentNode = new Node<>(element, null);
+                SingleLinkedList.Node<E> currentNode = new SingleLinkedList.Node<>(element, null);
                 prevNode.next = currentNode;
                 prevNode = currentNode;
             }
-            size++;
         }
         tail = prevNode;
     }
@@ -47,14 +46,14 @@ public class SingleLinkedList<E> implements List<E> {
 
         int index = 0;
         if (element == null) {
-            for (Node<E> node = head; node != null; node = node.next) {
+            for (SingleLinkedList.Node<E> node = head; node != null; node = node.next) {
                 if (node.element == null) {
                     return index;
                 }
                 index++;
             }
         } else {
-            for (Node<E> node = head; node != null; node = node.next) {
+            for (SingleLinkedList.Node<E> node = head; node != null; node = node.next) {
                 if (element.equals(node.element)) {
                     return index;
                 }
@@ -81,13 +80,13 @@ public class SingleLinkedList<E> implements List<E> {
         }
 
         if (index == 0) {
-            Node<E> oldHead = head;
-            head = new Node<>(element, oldHead);
+            SingleLinkedList.Node<E> oldHead = head;
+            head = new SingleLinkedList.Node<>(element, oldHead);
             size++;
         } else {
-            Node<E> oldPreNode = node(index - 1);
-            Node<E> node = oldPreNode.next;
-            oldPreNode.next = new Node<>(element, node);
+            SingleLinkedList.Node<E> oldPreNode = node(index - 1);
+            SingleLinkedList.Node<E> node = oldPreNode.next;
+            oldPreNode.next = new SingleLinkedList.Node<>(element, node);
             size++;
         }
 
@@ -100,7 +99,7 @@ public class SingleLinkedList<E> implements List<E> {
             throw new IndexOutOfBoundsException(index + " >= " + size);
         }
 
-        Node<E> node = node(index);
+        SingleLinkedList.Node<E> node = node(index);
         E element = node.element;
         node.element = newElement;
 
@@ -114,13 +113,13 @@ public class SingleLinkedList<E> implements List<E> {
         }
 
         if (index == 0) {
-            Node<E> oldHead = head;
+            SingleLinkedList.Node<E> oldHead = head;
             head = oldHead.next;
             size--;
             return head == null ? null : head.element;
         } else {
-            Node<E> toDelPrevNode = node(index - 1);
-            Node<E> toDelNode = toDelPrevNode.next;
+            SingleLinkedList.Node<E> toDelPrevNode = node(index - 1);
+            SingleLinkedList.Node<E> toDelNode = toDelPrevNode.next;
             toDelPrevNode.next = toDelPrevNode.next.next;
             if(size - 1 == index){
                 tail = toDelPrevNode;
@@ -132,7 +131,7 @@ public class SingleLinkedList<E> implements List<E> {
 
     @Override
     public boolean add(E element) {
-        Node<E> node = new Node<>(element, null);
+        SingleLinkedList.Node<E> node = new SingleLinkedList.Node<>(element, null);
         if(isEmpty()){
             head = node;
             tail = head;
@@ -178,17 +177,18 @@ public class SingleLinkedList<E> implements List<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new SingleLinkedListIterator();
+        return null;
     }
 
     private class SingleLinkedListIterator implements Iterator<E>{
 
-        Node<E> prevNode = null;
-        Node<E> node = head;
+        SingleLinkedList.Node<E> prevNode = null;
+        SingleLinkedList.Node<E> node = head;
+        int index = 0;
 
         @Override
         public boolean hasNext() {
-            return node != null && size != 0;
+            return node != null;
         }
 
         @Override
@@ -201,13 +201,13 @@ public class SingleLinkedList<E> implements List<E> {
 
         @Override
         public void remove() {
-            SingleLinkedList.this.remove(prevNode);
+            DoublyLinkedList.this.remove(index);
         }
     }
 
-    Node<E> node(int index) {
+    private SingleLinkedList.Node<E> node(int index) {
         int cursor = 0;
-        Node<E> node = head;
+        SingleLinkedList.Node<E> node = head;
         for (; node != null; node = node.next) {
             if (cursor == index) {
                 return node;
@@ -220,66 +220,11 @@ public class SingleLinkedList<E> implements List<E> {
 
     final static class Node<E> {
         E element;
-        Node<E> next;
+        SingleLinkedList.Node<E> next;
 
-        Node(E element, Node<E> next) {
+        Node(E element, SingleLinkedList.Node<E> next) {
             this.element = element;
             this.next = next;
         }
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder("[ ");
-        int count = 0;
-        for(Node<E> node = head;node != null && count < size;node = node.next,count++){
-            stringBuilder.append(String.valueOf(node.element)).append(",");
-        }
-
-        String toReturn = stringBuilder.toString();
-        if(toReturn.endsWith(",")){
-            toReturn = toReturn.substring(0,toReturn.lastIndexOf(","));
-        }
-
-        return toReturn + " ]";
-    }
-
-    Node<E> remove(Node<E> node){
-        if(head == null || size == 0){
-            return null;
-        }else{
-            for (Node<E> n = head;n != null;n = n.next){
-                if(n.equals(node)){
-                    if(size == 1){
-                        head = null;
-                        tail = null;
-                    }else{
-                        if(n == head){
-                            head = head.next;
-                            tail.next = head;
-                        }else if(n == tail){
-                            Node<E> tailPrev = node(size - 2);
-                            tailPrev.next = head;
-                        }else{
-                            Node<E> nodePrev = node(nodeIndex(node) - 1);
-                            nodePrev.next = node.next;
-                        }
-                    }
-                    size--;
-                    return n;
-                }
-            }
-        }
-        return null;
-    }
-
-    private int nodeIndex(Node<E> node) {
-        int index = 0;
-        for (Node<E> n = head;n != null;n = n.next,index ++){
-            if(n.equals(node)){
-                return index;
-            }
-        }
-        return -1;
     }
 }
