@@ -1,3 +1,5 @@
+package github.clyoudu.list;
+
 import github.clyoudu.list.CircularLinkedList;
 
 import java.util.Iterator;
@@ -8,7 +10,7 @@ import java.util.LinkedList;
  *
  * @Author chenlei
  * @DateTime 2018/5/3 16:20
- * @Description TestCircularLinkedList
+ * @Description github.clyoudu.list.TestCircularLinkedList
  */
 public class TestCircularLinkedList {
 

@@ -1,3 +1,5 @@
+package github.clyoudu.list;
+
 import github.clyoudu.list.SingleLinkedList;
 
 import java.util.Iterator;
@@ -8,7 +10,7 @@ import java.util.Iterator;
  * @author chenlei
  * @date 2018/4/26
  * @time 23:01
- * @desc TestSingleLinkedList
+ * @desc github.clyoudu.list.TestSingleLinkedList
  */
 public class TestSingleLinkedList {
 

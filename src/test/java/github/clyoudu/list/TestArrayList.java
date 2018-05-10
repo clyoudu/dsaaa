@@ -1,3 +1,5 @@
+package github.clyoudu.list;
+
 import github.clyoudu.list.ArrayList;
 
 import java.util.Iterator;
@@ -8,7 +10,7 @@ import java.util.Iterator;
  * @author chenlei
  * @date 2018/4/25
  * @time 23:46
- * @desc TestArrayList
+ * @desc github.clyoudu.list.TestArrayList
  */
 public class TestArrayList {
 
