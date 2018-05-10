@@ -6,9 +6,9 @@ package github.clyoudu.stack;
  *
  * @Author chenlei
  * @DateTime 2018/5/10 11:43
- * @Description github.clyoudu.stack.TestStack
+ * @Description github.clyoudu.stack.TestArrayStack
  */
-public class TestStack {
+public class TestArrayStack {
 
     public static void main(String[] args){
         ArrayStack<String> arrayStack = new ArrayStack<>();

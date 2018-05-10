@@ -117,7 +117,7 @@ public class SingleLinkedList<E> implements List<E> {
             Node<E> oldHead = head;
             head = oldHead.next;
             size--;
-            return head == null ? null : head.element;
+            return oldHead.element;
         } else {
             Node<E> toDelPrevNode = node(index - 1);
             Node<E> toDelNode = toDelPrevNode.next;
