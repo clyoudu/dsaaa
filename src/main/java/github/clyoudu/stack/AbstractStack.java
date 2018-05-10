@@ -25,7 +25,7 @@ public abstract class AbstractStack<E> implements Stack<E> {
 
     @Override
     public E pop(){
-        if (list.size() < 1) {
+        if (list.isEmpty()) {
             throw new ArrayIndexOutOfBoundsException("Empty Stack!");
         }
         return list.remove(list.size() - 1);
@@ -33,7 +33,7 @@ public abstract class AbstractStack<E> implements Stack<E> {
 
     @Override
     public E peek(){
-        if (list.size() < 1) {
+        if (list.isEmpty()) {
             throw new ArrayIndexOutOfBoundsException("Empty Stack!");
         }
         return list.get(list.size() - 1);

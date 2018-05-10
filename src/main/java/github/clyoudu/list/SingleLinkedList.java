@@ -76,7 +76,7 @@ public class SingleLinkedList<E> implements List<E> {
 
     @Override
     public boolean insert(int index, E element) {
-        if (index >= size) {
+        if (index != 0 && index >= size) {
             throw new IndexOutOfBoundsException(index + " >= " + size);
         }
 
