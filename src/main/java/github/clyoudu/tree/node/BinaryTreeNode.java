@@ -1,5 +1,6 @@
 package github.clyoudu.tree.node;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * @DateTime 2018/5/21 17:24
  * @Description BinaryTreeNode
  */
-public class BinaryTreeNode<E> extends SimpleTreeNode<E> implements TreeNode<E> {
+public class BinaryTreeNode<E> extends AbstractTreeNode<E> implements TreeNode<E> {
 
     protected BinaryTreeNode<E> leftChild;
 
@@ -40,7 +41,14 @@ public class BinaryTreeNode<E> extends SimpleTreeNode<E> implements TreeNode<E> 
 
     @Override
     public List<TreeNode<E>> getChildren() {
-        return Arrays.asList(leftChild,rightChild);
+        List<TreeNode<E>> result = new ArrayList<>();
+        if(leftChild != null){
+            result.add(leftChild);
+        }
+        if(rightChild != null){
+            result.add(rightChild);
+        }
+        return result;
     }
 
     @Override
@@ -72,6 +80,17 @@ public class BinaryTreeNode<E> extends SimpleTreeNode<E> implements TreeNode<E> 
 
     @Override
     public boolean hashChildren() {
-        return leftChild != null && rightChild != null;
+        return leftChild != null || rightChild != null;
+    }
+
+    public BinaryTreeNode<E> addChild(BinaryTreeNode<E> node) {
+        if(leftChild == null){
+            leftChild = (BinaryTreeNode<E>) node.setParent(this);
+        }else if(rightChild == null){
+            rightChild = (BinaryTreeNode<E>) node.setParent(this);
+        }else {
+            throw new RuntimeException("Children size must lte 2.");
+        }
+        return this;
     }
 }
