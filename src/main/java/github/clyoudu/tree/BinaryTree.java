@@ -32,10 +32,19 @@ public class BinaryTree<E> extends AbstractTree<E> implements Tree<E> {
             int level = binaryNode.getLevel();
 
             if(node.hashChildren()){
-                result.addAll(inorderTraversal(binaryNode.getLeftChild().setLevel(level + 1)));
-                result.add(binaryNode);
-                result.addAll(inorderTraversal(binaryNode.getRightChild().setLevel(level + 1)));
+                if(binaryNode.getLeftChild() != null){
+                    result.addAll(inorderTraversal(binaryNode.getLeftChild().setLevel(level + 1)));
+                }
             }
+
+            result.add(binaryNode);
+
+            if(node.hashChildren()){
+                if(binaryNode.getRightChild() != null){
+                    result.addAll(inorderTraversal(binaryNode.getRightChild().setLevel(level + 1)));
+                }
+            }
+
         }
 
         return result;

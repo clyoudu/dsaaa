@@ -63,7 +63,7 @@ public class StackCalculator {
         return numStack.pop();
     }
 
-    private static List<String> reversePolishExp(String exp) {
+    public static List<String> reversePolishExp(String exp) {
         List<String> list = new ArrayList<>();
         ArrayStack<Character> stack = new ArrayStack<>();
 
@@ -121,7 +121,7 @@ public class StackCalculator {
     }
 
 
-    private static String typeOfCharacter(Character character) {
+    public static String typeOfCharacter(Character character) {
         switch (character) {
             case '+':
             case '-':

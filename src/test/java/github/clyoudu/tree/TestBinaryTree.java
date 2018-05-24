@@ -51,6 +51,10 @@ public class TestBinaryTree {
         System.out.println("========================length===================");
         System.out.println(binaryTree.length("github","ArrayList.java"));
 
+        list = binaryTree.inorderTraversal();
+        System.out.println("========================inorderTraversal===================");
+        list.forEach(node -> System.out.println(genTab(node.getLevel()) + node.getElement()));
+
         binaryTree.remove("ArrayList.java");
         list = binaryTree.preorderTraversal();
         System.out.println("========================remove & preorderTraversal===================");
