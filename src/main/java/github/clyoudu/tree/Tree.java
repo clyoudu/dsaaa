@@ -61,4 +61,6 @@ public interface Tree<E> {
 
     int height(E node);
 
+    int height();
+
 }

@@ -45,7 +45,7 @@ public abstract class AbstractTreeNode<E> implements TreeNode<E> {
         return parent;
     }
 
-    protected AbstractTreeNode<E> setParent(TreeNode<E> parent) {
+    public AbstractTreeNode<E> setParent(TreeNode<E> parent) {
         this.parent = parent;
         this.level = parent.getLevel() + 1;
         return this;

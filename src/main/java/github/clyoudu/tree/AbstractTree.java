@@ -71,16 +71,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
 
     @Override
     public List<TreeNode<E>> getLeaves() {
-        List<TreeNode<E>> result = new ArrayList<>();
-        if(root != null){
-            if(root.hashChildren()){
-                List<TreeNode<E>> children = root.getChildren();
-                for (TreeNode<E> child : children) {
-                    result.addAll(getLeaves(child));
-                }
-            }
-        }
-        return result;
+        return getLeaves(root);
     }
 
     protected List<TreeNode<E>> getLeaves(TreeNode<E> node) {
@@ -351,7 +342,10 @@ public abstract class AbstractTree<E> implements Tree<E> {
     }
 
     protected int depth(TreeNode<E> node) {
-        return length(root,node);
+        if(root == null){
+            return 0;
+        }
+        return length(root,node) + 1;
     }
 
     protected int height(TreeNode<E> node) {
@@ -361,7 +355,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
             for (TreeNode<E> leaf : leaves) {
                 List<TreeNode<E>> path = path(node,leaf);
                 if(path != null){
-                    maxHeight = Math.max(maxHeight,path.size() - 1);
+                    maxHeight = Math.max(maxHeight,path.size());
                 }
             }
         }
@@ -410,5 +404,10 @@ public abstract class AbstractTree<E> implements Tree<E> {
             throw new RuntimeException("Node not exist!");
         }
         return height(treeNode);
+    }
+
+    @Override
+    public int height() {
+        return height(root);
     }
 }
