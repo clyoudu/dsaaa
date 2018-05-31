@@ -55,6 +55,8 @@ public class BinaryTreeNode<E> extends AbstractTreeNode<E> implements TreeNode<E
     public AbstractTreeNode<E> setChildren(List<TreeNode<E>> children) {
         if(children == null || children.isEmpty()){
             this.children = null;
+            this.leftChild = null;
+            this.rightChild = null;
             return this;
         }
 

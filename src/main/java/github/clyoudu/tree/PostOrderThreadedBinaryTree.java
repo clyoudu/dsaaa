@@ -14,7 +14,7 @@ import github.clyoudu.tree.node.TreeNode;
  */
 public class PostOrderThreadedBinaryTree<E> extends ThreadedBinaryTree<E> implements Tree<E>  {
 
-    ThreadBinaryTreeNode<E> preNode = null;
+    private ThreadBinaryTreeNode<E> preNode = null;
 
     public PostOrderThreadedBinaryTree(ThreadBinaryTreeNode<E> root) {
         super(root);
@@ -23,6 +23,16 @@ public class PostOrderThreadedBinaryTree<E> extends ThreadedBinaryTree<E> implem
     public PostOrderThreadedBinaryTree(E[] array) {
         super(array);
         postOrderThreadHelp((ThreadBinaryTreeNode<E>) super.root);
+    }
+
+    @Override
+    public ThreadBinaryTreeNode<E> preNode(E element) {
+        return null;
+    }
+
+    @Override
+    public ThreadBinaryTreeNode<E> nextNode(E element) {
+        return null;
     }
 
     protected void postOrderThreadHelp(ThreadBinaryTreeNode<E> node) {

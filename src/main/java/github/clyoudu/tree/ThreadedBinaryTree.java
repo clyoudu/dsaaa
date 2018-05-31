@@ -139,4 +139,9 @@ public abstract class ThreadedBinaryTree<E> extends BinaryTree<E> implements Tre
 
         return result;
     }
+
+    public abstract ThreadBinaryTreeNode<E> preNode(E element);
+
+    public abstract ThreadBinaryTreeNode<E> nextNode(E element);
+
 }

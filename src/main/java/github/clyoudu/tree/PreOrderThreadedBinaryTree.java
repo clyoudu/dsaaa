@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class PreOrderThreadedBinaryTree<E> extends ThreadedBinaryTree<E> implements Tree<E> {
 
-    ThreadBinaryTreeNode<E> preNode = null;
+    private ThreadBinaryTreeNode<E> preNode = null;
 
     public PreOrderThreadedBinaryTree(ThreadBinaryTreeNode<E> root) {
         super(root);
@@ -24,6 +24,61 @@ public class PreOrderThreadedBinaryTree<E> extends ThreadedBinaryTree<E> impleme
     public PreOrderThreadedBinaryTree(E[] array) {
         super(array);
         preOrderThreadHelp((ThreadBinaryTreeNode<E>) super.root);
+    }
+
+    @Override
+    public ThreadBinaryTreeNode<E> preNode(E element) {
+        ThreadBinaryTreeNode<E> node = (ThreadBinaryTreeNode<E>) contains(element);
+        if(node == null){
+            throw new RuntimeException("node not exist!");
+        }
+
+        return preNode(node);
+    }
+
+    protected ThreadBinaryTreeNode<E> preNode(ThreadBinaryTreeNode<E> node) {
+        if(node.getLeftFlag() == 1){
+            return (ThreadBinaryTreeNode<E>) node.getLeftChild();
+        }
+
+        ThreadBinaryTreeNode<E> parent = (ThreadBinaryTreeNode<E>) node.getParent();
+        if(parent != null && (parent.getLeftFlag() == 1 || node == parent.getLeftChild())){//如果有父节点，且父节点没有左孩子或左孩子就是自己
+            return parent;
+        }else if(parent != null && parent.getLeftFlag() != 1){//如果有父节点且有左孩子，那么寻找左子树的最右节点
+            ThreadBinaryTreeNode<E> returnNode = (ThreadBinaryTreeNode<E>) parent.getLeftChild();
+            while(returnNode.hashChildren()){
+                returnNode = (ThreadBinaryTreeNode<E>) returnNode.getRightChild();
+            }
+            return returnNode;
+        }
+
+        return null;
+    }
+
+    @Override
+    public ThreadBinaryTreeNode<E> nextNode(E element) {
+        ThreadBinaryTreeNode<E> node = (ThreadBinaryTreeNode<E>) contains(element);
+        if(node == null){
+            throw new RuntimeException("node not exist!");
+        }
+
+        return nextNode(node);
+    }
+
+    protected ThreadBinaryTreeNode<E> nextNode(ThreadBinaryTreeNode<E> node) {
+        if(node.getRightFlag() == 1){
+            return (ThreadBinaryTreeNode<E>) node.getRightChild();
+        }
+
+        if(node.getLeftFlag() != 1){
+            return (ThreadBinaryTreeNode<E>) node.getLeftChild();
+        }
+
+        if(node.getLeftFlag() == 1 && node.getRightFlag() != 1){
+            return (ThreadBinaryTreeNode<E>) node.getRightChild();
+        }
+
+        return null;
     }
 
     protected void preOrderThreadHelp(ThreadBinaryTreeNode<E> node) {

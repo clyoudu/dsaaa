@@ -1,5 +1,10 @@
 package github.clyoudu.tree;
 
+import github.clyoudu.tree.node.TreeNode;
+
+import java.util.Optional;
+import java.util.stream.Stream;
+
 /**
  * Create by IntelliJ IDEA
  *
@@ -49,6 +54,26 @@ public class TestThreadedBinaryTree {
 
         System.out.println("========================threaded binary tree threadInOrderTraversal===================");
         postOrderThreadedBinaryTree.threadPostOrderTraversal().forEach(stringTreeNode -> System.out.println(stringTreeNode.getElement()));
+
+        System.out.println("========================pre order threaded binary tree preNode===================");
+        Stream.of("A","B","C","D","E","F","G","H").forEach(s -> {
+            TreeNode<String> node = preOrderThreadedBinaryTree.preNode(s);
+            if(node == null){
+                System.out.println(s + " <- null");
+            }else{
+                System.out.println(s + " <- " + node.getElement());
+            }
+        });
+
+        System.out.println("========================pre order threaded binary tree nextNode===================");
+        Stream.of("A","B","C","D","E","F","G","H").forEach(s -> {
+            TreeNode<String> node = preOrderThreadedBinaryTree.nextNode(s);
+            if(node == null){
+                System.out.println(s + " -> null");
+            }else{
+                System.out.println(s + " -> " + node.getElement());
+            }
+        });
 
     }
 
