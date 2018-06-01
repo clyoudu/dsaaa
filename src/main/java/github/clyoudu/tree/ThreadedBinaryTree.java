@@ -140,8 +140,26 @@ public abstract class ThreadedBinaryTree<E> extends BinaryTree<E> implements Tre
         return result;
     }
 
-    public abstract ThreadBinaryTreeNode<E> preNode(E element);
+    public  ThreadBinaryTreeNode<E> preNode(E element){
+        ThreadBinaryTreeNode<E> node = (ThreadBinaryTreeNode<E>) contains(element);
+        if(node == null){
+            throw new RuntimeException("node not exist!");
+        }
 
-    public abstract ThreadBinaryTreeNode<E> nextNode(E element);
+        return preNode(node);
+    }
+
+    protected abstract ThreadBinaryTreeNode<E> preNode(ThreadBinaryTreeNode<E> node);
+
+    public ThreadBinaryTreeNode<E> nextNode(E element) {
+        ThreadBinaryTreeNode<E> node = (ThreadBinaryTreeNode<E>) contains(element);
+        if(node == null){
+            throw new RuntimeException("node not exist!");
+        }
+
+        return nextNode(node);
+    }
+
+    protected abstract ThreadBinaryTreeNode<E> nextNode(ThreadBinaryTreeNode<E> node);
 
 }

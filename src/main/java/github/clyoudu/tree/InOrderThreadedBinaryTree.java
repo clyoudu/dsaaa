@@ -26,12 +26,37 @@ public class InOrderThreadedBinaryTree<E> extends ThreadedBinaryTree<E> implemen
     }
 
     @Override
-    public ThreadBinaryTreeNode<E> preNode(E element) {
+    protected ThreadBinaryTreeNode<E> preNode(ThreadBinaryTreeNode<E> node) {
+        if(node.getLeftFlag() == 1){
+            return (ThreadBinaryTreeNode<E>) node.getLeftChild();
+        }
+
+        if(node.getLeftFlag() != 1 && node.hashChildren()){
+            ThreadBinaryTreeNode<E> returnNode = (ThreadBinaryTreeNode<E>) node.getLeftChild();
+            while(returnNode.getRightFlag() != 1){
+                returnNode = (ThreadBinaryTreeNode<E>) returnNode.getRightChild();
+            }
+            return returnNode;
+        }
+
+
         return null;
     }
 
     @Override
-    public ThreadBinaryTreeNode<E> nextNode(E element) {
+    protected ThreadBinaryTreeNode<E> nextNode(ThreadBinaryTreeNode<E> node) {
+        if(node.getRightFlag() == 1){
+            return (ThreadBinaryTreeNode<E>) node.getRightChild();
+        }
+
+        if(node.getRightFlag() != 1 && node.hashChildren()){
+            ThreadBinaryTreeNode<E> returnNode = (ThreadBinaryTreeNode<E>) node.getRightChild();
+            while(returnNode.getLeftFlag() != 1){
+                returnNode = (ThreadBinaryTreeNode<E>) returnNode.getLeftChild();
+            }
+            return returnNode;
+        }
+
         return null;
     }
 

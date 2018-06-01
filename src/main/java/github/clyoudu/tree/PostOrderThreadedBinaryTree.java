@@ -26,12 +26,42 @@ public class PostOrderThreadedBinaryTree<E> extends ThreadedBinaryTree<E> implem
     }
 
     @Override
-    public ThreadBinaryTreeNode<E> preNode(E element) {
+    protected ThreadBinaryTreeNode<E> preNode(ThreadBinaryTreeNode<E> node) {
+        if(node.getLeftFlag() == 1){
+            return (ThreadBinaryTreeNode<E>) node.getLeftChild();
+        }
+
+        if(node.getLeftFlag() != 1){
+            ThreadBinaryTreeNode<E> parent = (ThreadBinaryTreeNode<E>) node.getParent();
+            if(parent == null){//root
+                return (ThreadBinaryTreeNode<E>) node.getRightChild();
+            }else if(node.hashChildren()){
+                if(node.getRightFlag() != 1){
+                    return (ThreadBinaryTreeNode<E>) node.getRightChild();
+                }else{
+                    return (ThreadBinaryTreeNode<E>) node.getLeftChild();
+                }
+            }
+
+        }
         return null;
     }
 
     @Override
-    public ThreadBinaryTreeNode<E> nextNode(E element) {
+    protected ThreadBinaryTreeNode<E> nextNode(ThreadBinaryTreeNode<E> node) {
+        if(node.getRightFlag() == 1){
+            return (ThreadBinaryTreeNode<E>) node.getRightChild();
+        }
+
+        ThreadBinaryTreeNode<E> parent = (ThreadBinaryTreeNode<E>) node.getParent();
+        if(parent == null){//root
+            return null;
+        }else if(parent.getRightFlag() == 1 || parent.getRightChild() == node){
+            return parent;
+        }else if(parent.getLeftFlag() != 1 && parent.getLeftChild() == node){
+            return (ThreadBinaryTreeNode<E>) parent.getRightChild();
+        }
+
         return null;
     }
 

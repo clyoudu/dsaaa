@@ -1,5 +1,6 @@
 package github.clyoudu.tree;
 
+import github.clyoudu.tree.node.BinaryTreeNode;
 import github.clyoudu.tree.node.TreeNode;
 
 import java.util.Optional;
@@ -55,9 +56,21 @@ public class TestThreadedBinaryTree {
         System.out.println("========================threaded binary tree threadInOrderTraversal===================");
         postOrderThreadedBinaryTree.threadPostOrderTraversal().forEach(stringTreeNode -> System.out.println(stringTreeNode.getElement()));
 
-        System.out.println("========================pre order threaded binary tree preNode===================");
+        //A B D G C E H F
+        testPreNextNode(preOrderThreadedBinaryTree,"pre");
+
+        //D G B A H E C F
+        testPreNextNode(inOrderThreadedBinaryTree,"in");
+
+        //G D B H E F C A
+        testPreNextNode(postOrderThreadedBinaryTree,"post");
+
+    }
+
+    private static void testPreNextNode(ThreadedBinaryTree<String> tree,String type){
+        System.out.println("========================" + type + " order threaded binary tree preNode===================");
         Stream.of("A","B","C","D","E","F","G","H").forEach(s -> {
-            TreeNode<String> node = preOrderThreadedBinaryTree.preNode(s);
+            TreeNode<String> node = tree.preNode(s);
             if(node == null){
                 System.out.println(s + " <- null");
             }else{
@@ -65,16 +78,15 @@ public class TestThreadedBinaryTree {
             }
         });
 
-        System.out.println("========================pre order threaded binary tree nextNode===================");
+        System.out.println("========================" + type + " order threaded binary tree nextNode===================");
         Stream.of("A","B","C","D","E","F","G","H").forEach(s -> {
-            TreeNode<String> node = preOrderThreadedBinaryTree.nextNode(s);
+            TreeNode<String> node = tree.nextNode(s);
             if(node == null){
                 System.out.println(s + " -> null");
             }else{
                 System.out.println(s + " -> " + node.getElement());
             }
         });
-
     }
 
 }

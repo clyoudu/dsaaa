@@ -27,15 +27,6 @@ public class PreOrderThreadedBinaryTree<E> extends ThreadedBinaryTree<E> impleme
     }
 
     @Override
-    public ThreadBinaryTreeNode<E> preNode(E element) {
-        ThreadBinaryTreeNode<E> node = (ThreadBinaryTreeNode<E>) contains(element);
-        if(node == null){
-            throw new RuntimeException("node not exist!");
-        }
-
-        return preNode(node);
-    }
-
     protected ThreadBinaryTreeNode<E> preNode(ThreadBinaryTreeNode<E> node) {
         if(node.getLeftFlag() == 1){
             return (ThreadBinaryTreeNode<E>) node.getLeftChild();
@@ -56,15 +47,6 @@ public class PreOrderThreadedBinaryTree<E> extends ThreadedBinaryTree<E> impleme
     }
 
     @Override
-    public ThreadBinaryTreeNode<E> nextNode(E element) {
-        ThreadBinaryTreeNode<E> node = (ThreadBinaryTreeNode<E>) contains(element);
-        if(node == null){
-            throw new RuntimeException("node not exist!");
-        }
-
-        return nextNode(node);
-    }
-
     protected ThreadBinaryTreeNode<E> nextNode(ThreadBinaryTreeNode<E> node) {
         if(node.getRightFlag() == 1){
             return (ThreadBinaryTreeNode<E>) node.getRightChild();
