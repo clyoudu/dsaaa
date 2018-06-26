@@ -54,9 +54,9 @@ public class BinarySearchTree<E> extends BinaryTree<E> implements Tree<E> {
         if (node == null) {
             int compare = comparator.compare(parent.getElement(), element);
             if(compare > 0){
-                parent.setLeftChild(new BinaryTreeNode<>(element));
+                parent.setLeftChild((BinaryTreeNode<E>) new BinaryTreeNode<>(element).setParent(parent));
             }else{
-                parent.setRightChild(new BinaryTreeNode<>(element));
+                parent.setRightChild((BinaryTreeNode<E>) new BinaryTreeNode<>(element).setParent(parent));
             }
             return this;
         }
@@ -150,12 +150,29 @@ public class BinarySearchTree<E> extends BinaryTree<E> implements Tree<E> {
                 binaryTreeNode.setElement(min(binaryTreeNode.getRightChild(), comparator));//节点更改为右子树最小值，这样左子树不会做任何更改
                 remove(binaryTreeNode.getRightChild(), binaryTreeNode.getElement());//同时删除右子树这个最小值
             } else {//如果只有一个孩子或没有孩子
-                if(binaryTreeNode.getLeftChild() != null){
-                    binaryTreeNode.setElement(binaryTreeNode.getLeftChild().getElement()).setChildren(binaryTreeNode.getLeftChild().getChildren());
+                BinaryTreeNode<E> parent = (BinaryTreeNode<E>) binaryTreeNode.getParent();
+                if(binaryTreeNode.getLeftChild() != null){//有左子树，
+                    if(parent.getLeftChild() == binaryTreeNode){
+                        parent.setLeftChild(binaryTreeNode.getLeftChild());
+                    }else{
+                        parent.setRightChild(binaryTreeNode.getLeftChild());
+                    }
+                    //binaryTreeNode.setElement(binaryTreeNode.getLeftChild().getElement()).setChildren(binaryTreeNode.getLeftChild().getChildren());
+
                 }else if(binaryTreeNode.getRightChild() != null){
-                    binaryTreeNode.setElement(binaryTreeNode.getRightChild().getElement()).setChildren(binaryTreeNode.getRightChild().getChildren());
+                    //binaryTreeNode.setElement(binaryTreeNode.getRightChild().getElement()).setChildren(binaryTreeNode.getRightChild().getChildren());
+                    if(parent.getLeftChild() == binaryTreeNode){
+                        parent.setLeftChild(binaryTreeNode.getRightChild());
+                    }else{
+                        parent.setRightChild(binaryTreeNode.getRightChild());
+                    }
                 }else{
-                    binaryTreeNode.setElement(null).setChildren(null);
+                    //binaryTreeNode.setElement(null).setChildren(null);
+                    if(parent.getLeftChild() == binaryTreeNode){
+                        parent.setLeftChild(null);
+                    }else{
+                        parent.setRightChild(null);
+                    }
                 }
             }
 

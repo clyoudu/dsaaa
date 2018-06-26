@@ -27,7 +27,7 @@ public class TestBinarySearchTree {
         System.out.println(binarySearchTree.min());
 
         System.out.println("========================binary search tree remove===================");
-        binarySearchTree.remove(9).getElement();
+        binarySearchTree.remove(5).getElement();
         binarySearchTree.inorderTraversal().forEach(stringTreeNode -> System.out.println(stringTreeNode.getElement()));
 
 
